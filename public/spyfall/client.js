@@ -62,23 +62,23 @@ window.onload = function() {
 	$('room-input').focus();
 };
 
-$('room-button').addEventListener('click', () => {joinRoom();});
+$('room-button').addEventListener('click', function(){joinRoom();});
 
-$('room-input').addEventListener('keypress', (e) => {
+$('room-input').addEventListener('keypress', function(e) {
 	if(e.charCode == 13){
 		joinRoom();
 	}
 });
 
-$('send-button').addEventListener('click', () => {sendChatMessage();});
+$('send-button').addEventListener('click', function(){sendChatMessage();});
 
-$('chat-input').addEventListener('keypress', (e) => {
+$('chat-input').addEventListener('keypress', function(e) {
 	if(e.charCode == 13){
 		sendChatMessage();
 	}
 });
 
-$('start-stop-button').addEventListener('click', () => {
+$('start-stop-button').addEventListener('click', function(){
 	$('start-stop-button').disabled = true;
 	if($('start-stop-button').innerHTML == 'START'){
 		socket.emit('gameStart');
@@ -87,45 +87,45 @@ $('start-stop-button').addEventListener('click', () => {
 	}
 });
 
-$('name-display').addEventListener('click', () => {
+$('name-display').addEventListener('click', function(){
 	if($('start-stop-button').innerHTML == 'START'){
 		// TODO prompt user for name to change to
 	}
 });
 
-$('guess-location-button').addEventListener('click', () => {
+$('guess-location-button').addEventListener('click', function(){
 	// TODO spy guess
 });
 
 // socket listeners
-socket.on('nameChange', (theName) => {
+socket.on('nameChange', function(theName){
 	name = theName;
-	forEach('name', (e) => {e.innerHTML = name;});
+	forEach('name', function(e){e.innerHTML = name;});
 });
 
-socket.on('joinRoomResponse', (theRoom, currentPlayers) => {
+socket.on('joinRoomResponse', function(theRoom, currentPlayers){
 	room = theRoom;
-	forEach('room', (e) => {e.innerHTML = room;});
+	forEach('room', function(e){e.innerHTML = room;});
 	players = currentPlayers;
 });
 
-socket.on('playersUpdated', (plrs) => {
+socket.on('playersUpdated', function(plrs) {
 	players = plrs;
 });
 
-socket.on('chatMessage', (msg) => {
+socket.on('chatMessage', function(msg){
 	displayMessage(msg);
 });
 
-socket.on('clearChat', () => {
+socket.on('clearChat', function(){
 	$('chat-box').innerHTML = '';
 });
 
-socket.on('host', () => {
+socket.on('host', function(){
 	$('host-controls').style.display = 'block';
 });
 
-socket.on('gameStart', (gamePlayers, gameLocations, location, role) => {
+socket.on('gameStart', function(gamePlayers, gameLocations, location, role){
 	$('start-stop-button').innerHTML = 'STOP';
 	$('start-stop-button').disabled = false;
 	$('players').innerHTML = '';
@@ -143,8 +143,8 @@ socket.on('gameStart', (gamePlayers, gameLocations, location, role) => {
 		html += '</div>';
 		$('locations').innerHTML += html;
 	}
-	forEach('strikeable', (e) => {
-		e.addEventListener('click', () => {
+	forEach('strikeable', function(e){
+		e.addEventListener('click', function(){
 			if(e.className == 'strikeable'){
 				e.className += ' strikethrough';
 				e.style.color = '#999';
@@ -156,7 +156,7 @@ socket.on('gameStart', (gamePlayers, gameLocations, location, role) => {
 	});
 	$('location').innerHTML = 'Location: ' + location;
 	$('role').innerHTML = 'Role: ' + role;
-	forEach('interface', (e) => {
+	forEach('interface', function(e){
 		e.style.display = 'none';
 	});
 	$('guess-location-button').style.display = 'inline-block';
@@ -164,7 +164,7 @@ socket.on('gameStart', (gamePlayers, gameLocations, location, role) => {
 	// TODO add guess button for spy
 });
 
-socket.on('gameStop', () => {
+socket.on('gameStop', function(){
 	$('start-stop-button').innerHTML = 'START';
 	$('start-stop-button').disabled = false;
 	$('players').innerHTML = '';
@@ -172,7 +172,7 @@ socket.on('gameStop', () => {
 	$('location').innerHTML = 'Location:';
 	$('role').innerHTML = 'Role:';
 	$('guess-location-button').style.display = 'none';
-	forEach('interface', (e) => {
+	forEach('interface', function(e){
 		e.style.display = 'none';
 	});
 });

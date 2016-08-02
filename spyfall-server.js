@@ -108,12 +108,12 @@ function addCustomFunctions(socket, room, roomName){
 // @callback args (<firstname>)
 function getRandomName(callback){
 	// Asynchronous request for a random name
-	http.get('http://api.randomuser.me/?inc=name&nat=US', (res) => {
+	http.get('http://api.randomuser.me/?inc=name&nat=US', function(res){
 		var str = '';
-		res.on('data', (chunk) => {
+		res.on('data', function(chunk){
 			str += chunk;
 		});
-		res.on('end', () => {
+		res.on('end', function(){
 			var json = eval('(' + str + ')');
 			var firstname = json.results[0].name.first;
 			firstname = firstname.charAt(0).toUpperCase() + firstname.slice(1);
@@ -148,7 +148,7 @@ function shuffle(array) {
 	return array;
 }
 
-spyfall.get('/', (req, res) => {
+spyfall.get('/', function(req, res){
 	res.sendFile(path.join(__dirname, 'public', 'spyfall', 'spyfall.html'));
 });
 
@@ -156,12 +156,12 @@ function bind(socketio){
 	io = socketio;
 
 	// On connect
-	io.on('connection', (socket) => {
+	io.on('connection', function(socket){
 
 		// On join room request
-		socket.on('joinRoomRequest', (room) => {
+		socket.on('joinRoomRequest', function(room) {
 			// TODO add logic for custom name
-			getRandomName((name) => {
+			getRandomName(function(name) {
 				// Join the actual socket.io room
 				socket.join(room);
 				var roomObject = getRoomById(room);
@@ -182,7 +182,7 @@ function bind(socketio){
 		});
 		
 		// On disconnect
-		socket.on('disconnect', () => {
+		socket.on('disconnect', function() {
 			// TODO check if leaving player is spy and end game if they are
 			if(socket.getRoom != undefined){
 				io.to(socket.getRoom().getName()).emit('chatMessage', '<p class="BLUE"><b>' + socket.getNickname() + '</b> left <b>' + socket.getRoom().getName() + '</b></p>');
@@ -195,7 +195,7 @@ function bind(socketio){
 		});
 
 		// On name change request
-		socket.on('nameChangeRequest', (name) => {
+		socket.on('nameChangeRequest', function(name) {
 			// Currently unused
 			var msg = '<p class="BLUE"><b>' + socket.getNickname() + '</b> is now <b>' + name + '</b></p>';
 			io.to(socket.getRoom().getName()).emit('chatMessage', msg);
@@ -205,12 +205,12 @@ function bind(socketio){
 		});
 
 		// On chat message
-		socket.on('chatMessage', (msg) => {
+		socket.on('chatMessage', function(msg) {
 			io.to(socket.getRoom().getName()).emit('chatMessage', '<p><b>' + socket.getNickname() + '</b>: ' + encodeHtmlEntity(msg) + '</p>');
 		});
 
 		// On command
-		socket.on('command', (cmd, args) => {
+		socket.on('command', function(cmd, args) {
 			if(cmd == 'clear'){
 				if(socket.isHost()){
 					io.to(socket.getRoom().getName()).emit('clearChat');
@@ -232,7 +232,7 @@ function bind(socketio){
 		});
 
 		// On game start
-		socket.on('gameStart', () => {
+		socket.on('gameStart', function() {
 			if(socket.isHost()){
 				var room = socket.getRoom().getName();
 				io.to(room).emit('clearChat');
@@ -263,7 +263,7 @@ function bind(socketio){
 		});
 
 		// On game stop
-		socket.on('gameStop', () => {
+		socket.on('gameStop', function() {
 			if(socket.isHost()){
 				io.to(socket.getRoom().getName()).emit('gameStop');
 				io.to(socket.getRoom().getName()).emit('chatMessage', '<p class="GREEN"><b>Game stopped</b></p>');
