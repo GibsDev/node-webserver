@@ -1,0 +1,57 @@
+<!doctype html>
+<html>
+	<head>
+		<title>Spyfall</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0">
+		<link rel="stylesheet" type="text/css" href="styles.css">
+		<link rel="icon" href="/images/favicon.ico" type="image/x-icon"/>
+		<script src="/socket.io/socket.io.js"></script>
+	</head>
+	<body>
+		<div class="interface" id="setup">
+			<div>
+				<h1>Enter room:</h1>
+				<input id="room-input" type="text">
+				<button id="room-button" type="button">ENTER</button>
+			</div>
+		</div>
+		<div class="interface" id="winner"></div>
+		<div id="game-wrapper">
+			<div id="game-display-wrapper">
+				<div id="game-display">
+					<div id="host-controls">
+						<h3>Host Controls:</h3>
+						<div id="host-button-holder">
+							<button id="start-stop-button" type="button">START</button>
+						</div>
+					</div>
+					<div id="my-info">
+						<h1 id="name-display" class="name">name</h1>
+						<h2 id="role">Role: </h2>
+						<h2 id="location">Location: </h2><button id="guess-location-button">Guess</button>
+					</div>
+					<div id="game-interface">
+						<h3>Player Checklist</h3>
+						<div id="players"></div>
+						<h3>Location Checklist</h3>
+						<div id="locations"></div>
+					</div>
+				</div>
+			</div>
+			<div id="chat-wrapper">
+			<div id="chat-title">
+				<p>Speaking as </p>
+				<p class="name bold">name</p>
+				<p> in </p>
+				<p class="room bold">room</p>
+			</div>
+				<div id="chat-box"></div>
+				<div id="chat-controls">
+					<input id="chat-input" type="text">
+					<button id="send-button" type="button">SEND</button>
+				<div>
+			</div>
+		</div>
+	</body>
+	<script src="client.js"></script>
+</html>

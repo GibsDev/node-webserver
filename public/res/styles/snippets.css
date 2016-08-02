@@ -1,0 +1,45 @@
+
+/* In-line snippets of code without syntax highlighting */
+code {
+	vertical-align: bottom;
+	background: #222;
+	color: #eee;
+	padding: 2px 8px;
+	display: inline-block;
+	font-size: 20px;
+	font-family: 'Inconsolata', monospace;
+	box-shadow: inset 1px 1px 5px #000;
+}
+
+div.code {
+	display: block;
+	background: #222;
+	color: #eee;
+	padding: 10px;
+	padding-right: 0px;
+	box-shadow: inset 1px 1px 5px #000;
+	width: 100%;
+}
+
+.line-numbers {
+	float: left;
+	text-align: right;
+}
+
+.line-numbers > pre {
+	color: #aaa;
+	font-size: 20px;
+	font-family: 'Inconsolata', monospace;
+	padding-right: 10px;
+	border-right: 1px solid #444;
+	margin-right: 2px;
+}
+
+.source {
+	display: block;
+	padding-left: 10px;
+	padding-right: 10px;
+	font-size: 20px;
+	font-family: 'Inconsolata', monospace;
+	overflow-x: auto;
+}

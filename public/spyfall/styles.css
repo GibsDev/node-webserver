@@ -1,0 +1,298 @@
+* {
+	margin: 0px;
+	padding: 0px;
+	font-family: Arial;
+	box-sizing: border-box;
+}
+
+html, body {
+	width: 100%;
+	height: 100%;
+}
+
+button{
+	font-weight: bold;
+}
+
+.BLUE {
+	color: #00c;
+}
+
+.RED {
+	color: #c00;
+}
+
+.GREEN {
+	color: #0c0;
+}
+
+.bold {
+	font-weight: bold;
+}
+
+.strikethrough {
+	text-decoration: line-through;
+}
+
+.interface {
+	position: absolute;
+	z-index: 1;
+	height: 100%;
+	width: 100%;
+	background: rgba(60,60,60,0.6);
+	display: none; /* changed to flex in js */
+	justify-content: space-around;
+	align-items: center;
+}
+
+.interface > div {
+	background: #f9f9f9;
+	border-radius: 3px;
+	vertical-align: middle;
+	padding: 20px;
+	opacity: 1.0;
+	border: 1px solid #ccc;
+	text-align: center;
+}
+
+.interface > div * {
+	margin-top: 15px;
+}
+
+.interface > div *:first-child {
+	margin-top: 0px;
+}
+
+.interface h1 {
+	font-size: 40px;
+}
+
+#room-input {
+	border: 2px solid #aaa;
+	border-bottom-left-radius: 5px;
+	border-top-left-radius: 5px;
+	border-right: 0px solid #aaa;
+	padding: 5px;
+}
+
+#room-button {
+	border: 2px solid #aaa;
+	border-bottom-right-radius: 5px;
+	border-top-right-radius: 5px;
+	border-left: 1px solid #aaa;
+	padding: 0px 5px;
+	color: #888;
+	font-weight: bold;
+	background: #fff;
+	padding: 5px;
+	margin-left: -5px;
+}
+
+#location {
+	display: inline-block;
+}
+
+#guess-location-button {
+	padding: 5px;
+	border-radius: 3px;
+	flex-grow: 1;
+	margin-bottom: 0px;
+	margin-left: 10px;
+	display: none;
+}
+
+#game-wrapper {
+	display: flex;
+	align-items: stretch;
+	flex-direction: row;
+	justify-content: space-between;
+	height: 100%;
+}
+
+#game-display-wrapper {
+	flex-grow: 1;
+	height: 100%;
+	overflow-y: auto;
+}
+
+#game-display {
+	margin: 0px auto;
+	max-width: 600px;
+}
+
+#game-display > div {
+	border-bottom: 1px solid #ddd;
+	padding: 10px 0px;
+}
+
+#game-display > div > * {
+	margin-bottom: 10px;
+}
+
+#game-display > div > *:last-child {
+	margin-bottom: 0px;
+}
+
+#game-display > div:last-child {
+	border-bottom: none;
+}
+
+#host-controls {
+	display: none;
+}
+
+#host-button-holder {
+	display: flex;
+	justify-content: space-between;
+	align-items: stretch;
+}
+
+#host-button-holder > button {
+	padding: 5px;
+	border-radius: 3px;
+	flex-grow: 1;
+	margin-bottom: 0px;
+	margin-right: 10px;
+}
+
+#host-button-holder > button:last-child {
+	margin-right: 0px;
+}
+
+#players {
+	display: flex;
+	flex-wrap: wrap;
+}
+
+#players > p {
+	font-weight: bold;
+	margin: 5px;
+	display: inline-block;
+	background: #333;
+	text-align: center;
+	margin-right: 10px;
+	border-radius: 3px;
+	padding: 10px;
+	color: #fff;
+	min-width: 175px;
+	flex-grow: 1;
+}
+
+#locations {
+	display: flex;
+	flex-wrap: wrap;
+}
+
+#locations > * {
+	margin: 5px;
+	display: inline-block;
+	background: #333;
+	text-align: center;
+	margin-right: 10px;
+	border-radius: 3px;
+	padding: 10px;
+	color: #fff;
+	min-width: 175px;
+	flex-grow: 1;
+}
+
+#location-reference {
+	display: flex;
+	flex-wrap: wrap;
+}
+
+#location-reference > p {
+	margin: 5px;
+	display: inline-block;
+	background: #333;
+	text-align: center;
+	margin-right: 10px;
+	border-radius: 3px;
+	padding: 5px;
+	color: #fff;
+	width: 100%;
+}
+
+#chat-wrapper {
+	width: 350px;
+	height: 100%;
+	display: flex;
+	flex-direction: column;
+	border-left: 1px solid #ccc;
+	background: #eee;
+}
+
+#chat-title {
+	padding: 10px;
+	border-bottom: 1px solid #ccc;
+	flex-shrink: 0;
+}
+
+#chat-title > * {
+	display: inline-block;
+}
+
+#chat-controls {
+	display: flex;
+	align-items: stretch;
+	justify-content: space-between;
+	padding: 10px;
+	height: 60px;
+	flex-shrink: 0;
+	border-top: 1px solid #ccc;
+}
+
+#chat-input {
+	flex-grow: 1;
+	border: 2px solid #aaa;
+	border-bottom-left-radius: 5px;
+	border-top-left-radius: 5px;
+	border-right: 1px solid #aaa;
+}
+
+#send-button {
+	border: 2px solid #aaa;
+	border-bottom-right-radius: 5px;
+	border-top-right-radius: 5px;
+	border-left: 0px solid #aaa;
+	padding: 0px 5px;
+	color: #888;
+	font-weight: bold;
+	background: #fff;
+}
+
+#chat-box {
+	overflow-y: scroll;
+	color: #eee;
+	padding: 10px;
+	color: #222;
+	vertical-align: text-bottom;
+	flex-grow: 1;
+	display: flex;
+	flex-direction: column-reverse;
+	background: #f9f9f9;
+}
+
+#chat-box > p {
+	margin: 4px;
+}
+
+#chat-input {
+	padding: 5px;
+}
+
+::-webkit-scrollbar {
+	width: 10px;
+}
+
+::-webkit-scrollbar-track {
+	-webkit-box-shadow: inset 0 0 4px rgba(0,0,0,0.3);
+}
+
+::-webkit-scrollbar-thumb {
+	background: #ccc; 
+	-webkit-box-shadow: inset 0 0 1px rgba(0,0,0,0.5); 
+}
+::-webkit-scrollbar-thumb:window-inactive {
+	background: #ddd;
+}

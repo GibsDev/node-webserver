@@ -1,0 +1,24 @@
+<svg width="128" height="128" xmlns="http://www.w3.org/2000/svg">
+ <defs>
+  <filter color-interpolation-filters="sRGB" height="1.0768" y="-0.0384" width="1.0768" x="-0.0384" id="filter4824">
+   <feGaussianBlur id="feGaussianBlur4826" stdDeviation="1.185515"/>
+  </filter>
+ </defs>
+ <metadata id="metadata3341">image/svg+xml</metadata>
+ <g>
+  <title>background</title>
+  <rect fill="none" id="canvas_background" height="402" width="582" y="-1" x="-1"/>
+ </g>
+ <g>
+  <title>Layer 1</title>
+  <g stroke="null" id="layer2">
+   <rect fill="#0096c8" stroke-width="14" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="4" y="0" x="0" height="128.472216" width="128.116428" id="rect4270"/>
+  </g>
+  <g id="layer3">
+   <path clip-rule="nonzero" opacity="0.538" fill="#000000" fill-rule="nonzero" stroke-width="12.6" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="4" stroke-dashoffset="0" filter="url(#filter4824)" id="path4262-8" d="m64.967216,21.7676a6.30063,6.30063 0 0 0 -6.30078,6.30079l0,37.04687a6.30063,6.30063 0 1 0 12.59961,0l0,-30.09961c14.00383,2.88641 24.44727,15.20594 24.44727,30.09961c0,17.05595 -13.69017,30.74805 -30.7461,30.74805c-17.05597,0 -30.74805,-13.69206 -30.74805,-30.74805a6.30063,6.30063 0 1 0 -12.5996,0c-0.00001,23.86551 19.48225,43.34766 43.34765,43.34766c23.86545,0 43.34767,-19.48217 43.34766,-43.34766c0,-23.86545 -19.4822,-43.34766 -43.34766,-43.34766z"/>
+  </g>
+  <g id="layer1">
+   <path fill="#000000" fill-opacity="0" stroke="#000000" stroke-width="12.6" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="4" id="path4262" d="m27.010874,64.236287c-0.00001,20.46076 16.58666,37.04716 37.04734,37.04716c20.46069,0 37.04735,-16.5866 37.04734,-37.04733c0,-20.46068 -16.58665,-37.04735 -37.04734,-37.04735l0,37.04752"/>
+  </g>
+ </g>
+</svg>

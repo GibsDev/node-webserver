@@ -1,0 +1,16 @@
+<svg width="116.395" height="132.638" xmlns="http://www.w3.org/2000/svg">
+
+ <g>
+  <title>background</title>
+  <rect fill="none" id="canvas_background" height="402" width="582" y="-1" x="-1"/>
+ </g>
+ <g>
+  <title>Layer 1</title>
+  <g transform="matrix(1.25,0,0,-1.25,-779.56837,2089.8162) " id="g2993">
+   <g transform="matrix(9.5324427,0,0,9.5324427,1348.9493,1188.2344) " id="g2995">
+    <path d="m-67.227,44.828l-1.591,-1.591l-2.499,0l-1.363,-1.363l0,1.363l-2.045,0l0,6.588l7.497,0l0,-4.997l0.001,0zm-8.406,5.906l-0.454,-1.817l0,-8.178l2.045,0l0,-1.136l1.136,0l1.136,1.136l1.817,0l3.635,3.634l0,6.361l-9.315,0l0,0z" fill="#EEEEEE" id="path2997"/>
+   </g>
+   <path d="m660.47,1619.88l8.662,0l0,25.99l-8.662,0l0,-25.99zm23.819,0l8.662,0l0,25.99l-8.662,0l0,-25.99z" fill="#EEEEEE" id="path2999"/>
+  </g>
+ </g>
+</svg>
