@@ -60,6 +60,8 @@ function getSocketById(socketID){
 
 // Set custom functions for rooms and sockets
 function addCustomFunctions(socket, room, roomName){
+	room.gameRunning = false;
+	// TODO add tracking for spy guesses
 	room.getSockets = function(){
 		var sockets = [];
 		var socketids = this.sockets;
@@ -97,6 +99,12 @@ function addCustomFunctions(socket, room, roomName){
 	socket.isHost = function(){
 		return room.getHost() == this;
 	};
+	socket.isSpy = function(){
+		if(socket.getRoom().gameRunning){
+			return socket.getRoom().getSpy() == socket;
+		}
+		return false;
+	}
 	socket.getNickname = function(){
 		return this.nickname;
 	};
@@ -148,6 +156,20 @@ function shuffle(array) {
 	return array;
 }
 
+function stopGame(socket, dc){
+	if(socket.isHost() || dc){
+		socket.getRoom().gameRunning = false;
+		io.to(socket.getRoom().getName()).emit('gameStop');
+		if(dc){
+			io.to(socket.getRoom().getName()).emit('chatMessage', '<p class="RED"><b>Game stopped because a player left.</b></p>');
+		} else {
+			io.to(socket.getRoom().getName()).emit('chatMessage', '<p class="GREEN"><b>Game stopped</b></p>');
+		}
+	} else {
+		socket.emit('chatMessage', '<p class="RED">You are not the host</p>');
+	}
+}
+
 spyfall.get('/', function(req, res){
 	res.sendFile(path.join(__dirname, 'public', 'spyfall', 'spyfall.html'));
 });
@@ -160,7 +182,6 @@ function bind(socketio){
 
 		// On join room request
 		socket.on('joinRoomRequest', function(room) {
-			// TODO add logic for custom name
 			getRandomName(function(name) {
 				// Join the actual socket.io room
 				socket.join(room);
@@ -183,8 +204,10 @@ function bind(socketio){
 		
 		// On disconnect
 		socket.on('disconnect', function() {
-			// TODO check if leaving player is spy and end game if they are
 			if(socket.getRoom != undefined){
+				if(socket.getRoom().gameRunning){
+					stopGame(socket, true);
+				}
 				io.to(socket.getRoom().getName()).emit('chatMessage', '<p class="BLUE"><b>' + socket.getNickname() + '</b> left <b>' + socket.getRoom().getName() + '</b></p>');
 				io.to(socket.getRoom().getName()).emit('playersUpdated', socket.getRoom().getPlayers());
 				if(socket.getRoom().getHost() != null){
@@ -224,6 +247,28 @@ function bind(socketio){
 				} else {
 					io.to(socket.getRoom().getName()).emit('chatMessage', '<div><b>' + socket.getNickname() + '</b>: <img src="' + args[0] + '" style="width: 100%;"></div>');
 				}
+			} else if(cmd == 'guess'){
+				if(socket.getRoom().gameRunning){
+					if(socket.isSpy()){
+						// TODO loop throug locations
+						// socket.emit('chatMessage', '<p class="RED">Invalid location.</p>');
+						socket.emit('chatMessage', '<p class="BLUE">This feature is incomplete.</p>');
+					} else {
+						socket.emit('chatMessage', '<p class="RED">You are not the spy!</p>');
+					}
+				} else {
+					socket.emit('chatMessage', '<p class="RED">The game has not started!</p>');
+				}
+			} else if(cmd == 'spy'){
+				if(socket.getRoom().gameRunning){
+					if(!socket.isSpy()){
+						socket.emit('chatMessage', '<p class="BLUE">This feature is incomplete.</p>');
+					} else {
+						socket.emit('chatMessage', '<p class="RED">You are the spy!</p>');
+					}
+				} else {
+					socket.emit('chatMessage', '<p class="RED">The game has not started!</p>');
+				}
 			} else if(cmd == 'commands'){
 				socket.emit('chatMessage', '<p class="BLUE">Commands: clear (clears chat, host only), img (posts an image to chat)</p>');
 			} else {
@@ -234,6 +279,8 @@ function bind(socketio){
 		// On game start
 		socket.on('gameStart', function() {
 			if(socket.isHost()){
+				socket.getRoom().gameRunning = true;
+				socket.getRoom().guesses = [];
 				var room = socket.getRoom().getName();
 				io.to(room).emit('clearChat');
 				io.to(room).emit('chatMessage', '<p class="GREEN"><b>Game started</b></p>');
@@ -264,15 +311,8 @@ function bind(socketio){
 
 		// On game stop
 		socket.on('gameStop', function() {
-			if(socket.isHost()){
-				io.to(socket.getRoom().getName()).emit('gameStop');
-				io.to(socket.getRoom().getName()).emit('chatMessage', '<p class="GREEN"><b>Game stopped</b></p>');
-			} else {
-				socket.emit('chatMessage', '<p class="RED">You are not the host</p>');
-			}
+			stopGame(socket, false);
 		});
-
-		// TODO add logic for spy guess and voting for spy
 
 	});
 }

@@ -1,0 +1,36 @@
+<!doctype html>
+<html>
+	<head>
+		<title>GibsDev</title>
+<!-- #include file="/res/includes/head.html" -->
+	</head>
+	<body>
+<!-- #include file="/res/includes/sidebar.html" -->
+		<div id="content-wrapper">
+			<div id="top-bar">
+				<img id="menu" src="/res/images/menu.svg" />
+			</div>
+			<main id="content">
+				<h1>Spyfall Rules</h1>
+				<p>There is a spy amoungst your group! Identify them before they identify your location!</p>
+				<p>Once the game starts each player is given a role at the a randomly selected location. The player who is selected to be the spy does not get to know what the location is.</p>
+				<p>The objective of the non-spies is to identify the spy, but there is a catch, you only get one unanimous vote. See below for more on the voting system.</p>
+				<p>The objective of the spy is to guess the location. But like the other players, the spy is only allowed one guess.</p>
+				<p>If either the spy or the other playes guess/vote the wrong location/person, the other <i>team</i> wins automatically.</p>
+				<h2>Playing the game</h2>
+				<p>The game is played by players asking eachother questions. A player will be randomly chosen to be the interrogator. The interrogator can ask any question that they want to any other player. After the other player responds, they become the next interrogator.</p>
+				<p>The challenege of the game is coming up with good questions to help identify the spy without giving up too much information so the spy can guess the location. On the other hand as the spy, you want to make sure that your answers do not give away the fact that you do not know what the location is.</p>
+				<h2>Voting/Guessing</h2>
+				<p>There is a built in voting/guessing system via chat commands, which this section goes over. But keep in mind that you can also play the game verbally with your friends (the host will just have to manually start and stop the game).</p>
+				<h3>As the spy</h3>
+				<p>Simply type <code>/guess &lt;location&gt;</code> into the chat.</p>
+				<p>Remember, you only get one guess!</p>
+				<h3>As a non-spy</h3>
+				<p>Just use the command <code>/spy &lt;player-name&gt;</code></p>
+				<p>The server will automatically keep track of spy suspicions and will calculate the winners once a single player name has the majority of the votes.</p>
+				<p>You can change your spy guess at any time using the same command. But once a player becomes a majority the game will end.</p>
+			</main>
+		</div>
+	</body>
+<!-- #include file="/res/includes/scripts.html" -->
+</html>

@@ -29,7 +29,6 @@ function forEach(className, doStuff){
 function joinRoom(){
 	if($('room-input').value != ''){
 		var room = $('room-input').value;
-		console.log('Joining room ' + room + '...');
 		$('setup').style.display = 'none';
 		socket.emit('joinRoomRequest', room);
 		$('room-input').value = '';
@@ -89,12 +88,8 @@ $('start-stop-button').addEventListener('click', function(){
 
 $('name-display').addEventListener('click', function(){
 	if($('start-stop-button').innerHTML == 'START'){
-		// TODO prompt user for name to change to
+		$('name-change').style.display = 'block';
 	}
-});
-
-$('guess-location-button').addEventListener('click', function(){
-	// TODO spy guess
 });
 
 // socket listeners
@@ -129,7 +124,9 @@ socket.on('gameStart', function(gamePlayers, gameLocations, location, role){
 	$('start-stop-button').innerHTML = 'STOP';
 	$('start-stop-button').disabled = false;
 	$('players').innerHTML = '';
+	$('game-interface').style.display = 'block';
 	players = gamePlayers;
+	$('my-info').style.display = 'block';
 	for (var i = 0; i < players.length; i++) {
 		$('players').innerHTML += '<p class="strikeable">' + players[i] + '</p>';
 	}
@@ -159,9 +156,6 @@ socket.on('gameStart', function(gamePlayers, gameLocations, location, role){
 	forEach('interface', function(e){
 		e.style.display = 'none';
 	});
-	$('guess-location-button').style.display = 'inline-block';
-	// TODO show guess button (if the spy)
-	// TODO add guess button for spy
 });
 
 socket.on('gameStop', function(){
@@ -169,10 +163,12 @@ socket.on('gameStop', function(){
 	$('start-stop-button').disabled = false;
 	$('players').innerHTML = '';
 	$('locations').innerHTML = '';
-	$('location').innerHTML = 'Location:';
+	$('location').innerHTML = 'Location: ';
 	$('role').innerHTML = 'Role:';
-	$('guess-location-button').style.display = 'none';
+	$('game-interface').style.display = 'none';
+	$('my-info').style.display = 'none';
 	forEach('interface', function(e){
 		e.style.display = 'none';
 	});
 });
+

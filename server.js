@@ -24,15 +24,18 @@ app.get('*.html', function(req, res){
 	});
 });
 
+spyfall.get('/rules', function(req, res){
+	include(path.join(__dirname, 'public', 'spyfall', 'rules.html'), {root:__dirname + '/public'}, function(err, markup){
+		if(err) throw err;
+		res.send(markup);
+	});
+});
+
 app.use('/spyfall', spyfall);
 
 app.use('/articles', articles);
 
-// TODO html include thingy here
-
 app.use(express.static('public'));
-
-// TODO or html include thingy
 
 app.get('*', function(req, res){
 	if(fs.existsSync(path.join(__dirname, 'public', req.url + '.html'))){

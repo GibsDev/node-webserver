@@ -10,8 +10,15 @@
 		<div class="interface" id="setup">
 			<div>
 				<h1>Enter room:</h1>
-				<input id="room-input" type="text">
-				<button id="room-button" type="button">ENTER</button>
+				<input class="interface-input" id="room-input" type="text">
+				<button class="interface-input-button" id="room-button" type="button">ENTER</button>
+			</div>
+		</div>
+		<div class="interface" id="name-change">
+			<div>
+				<h1>Change name:</h1>
+				<input class="interface-input" id="name-input" type="text">
+				<button class="interface-input-button" id="name-button" type="button">ENTER</button>
 			</div>
 		</div>
 		<div class="interface" id="winner"></div>
@@ -24,10 +31,13 @@
 							<button id="start-stop-button" type="button">START</button>
 						</div>
 					</div>
-					<div id="my-info">
+					<div id="name-holder">
 						<h1 id="name-display" class="name">name</h1>
+						<a href="/spyfall/rules" target="_blank"><h1 id="rules">Rules</h1></a>
+					</div>
+					<div id="my-info">
 						<h2 id="role">Role: </h2>
-						<h2 id="location">Location: </h2><button id="guess-location-button">Guess</button>
+						<h2 id="location">Location: </h2>
 					</div>
 					<div id="game-interface">
 						<h3>Player Checklist</h3>
